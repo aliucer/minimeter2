@@ -5,12 +5,12 @@ Bu döküman, mülakatta projeyi anlatırken izlemen gereken **hikaye akışın�
 ---
 
 ## 1. Giriş & Hedef (The "Hook")
-*Süre: 2 dakika*
-
-**Sen:** "MiniMeter, enerji faturalarının işlenmesini otomatize eden **yapay zeka destekli bir fatura yönetim sistemidir (AI-powered Utility Bill Management System).**"
-
-*   **Problem:** "Şirketler veya bireyler için elektrik/su faturalarını manuel takip etmek zordur. Veri girişi hataları olur ve analiz yapılamaz."
-*   **Çözüm:** "Bu sistem, faturayı (PDF/Resim) alır, AI ile okur, veriyi yapılandırır (normalize eder) ve analitik için saklar."
+### 🚀 Projenin Amacı (The Pitch)
+*   **İsim:** MiniMeter - AI Energy Agent prototipi.
+*   **Problem:** Messy utility bills (karmaşık enerji faturaları) ve manuel takip zorluğu.
+*   **Çözüm:** TrueMeter vizyonuyla uyumlu; AI ile fatura okuma ve veri yapılandırma.
+*   **Problem:** "Şirketler için karmaşık ve dağınık enerji faturalarını (messy utility bills) takip etmek operasyonel bir yüktür."
+*   **Çözüm:** "Bu sistem, faturayı alır, AI ile okur ve yapılandırır; böylece TrueMeter'ın vizyonu olan 'fatura konsolidasyonu ve tasarruf' için gerekli temiz veriyi sağlar."
 *   **Hedef:** "Ölçeklenebilir, hataya dayanıklı (fault-tolerant) ve modern bir mimari kurmak."
 
 ---

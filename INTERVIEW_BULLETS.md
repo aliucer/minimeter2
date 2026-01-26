@@ -28,7 +28,7 @@ Mülakat anında ekrana bakıp hızlıca söyleyebileceğin anahtar noktalar:
 *   **Secret Management:** Kimlik bilgilerini GCP Secret Manager ile koruyorum.
 *   **CI/CD Hazırlığı:** Dockerfile hazır, tek komutla buluta deploy edilebilir.
 
-### 💡 "Neden?" Cevapları
-*   **Neden FastAPI?** Pydantic entegrasyonu ve performansı için.
-*   **Neden Pub/Sub?** Servisler arası bağımlılığı azaltmak ve hata toleransı için.
-*   **Neden BigQuery?** Ham veriden iş değerine (Insights) hızlıca geçmek için.
+### 💡 Neden TrueMeter? (Personal Pitch)
+*   **Vizyon Uyumu:** "Faturayı sadece okumak değil, bir finansal varlık gibi konsolide etmek vizyonu için gereken altyapıyı kurdum."
+*   **Startup Mindset:** "Sıfırdan (from-scratch) her şeyi uçtan uca ayağa kaldırdım."
+*   **AI-Native:** "LLM'leri sadece bir oyuncak değil, üretim sisteminin (GCP pipeline) merkezine koydum."
