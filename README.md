@@ -128,17 +128,7 @@ minimeter2/
 ├── api/              # FastAPI application
 ├── worker/           # Pub/Sub consumer + LLM pipeline
 ├── shared/           # Pydantic models & DB schemas
-├── docs/             # General documentation
-│   └── interview_prep/ # SPECIFIC TRUEMETER INTERVIEW GUIDES
+├── docs/             # Documentation & Architecture
 ├── test_pipeline.sh  # Local end-to-end test script
 └── test_cloud.sh    # Live Cloud Run test script
 ```
-
-## Interview Preparation
-
-I have prepared detailed guides for the TrueMeter interview in `docs/interview_prep/`:
-- **TRUEMETER_PITCH.md**: How this project aligns with TrueMeter's mission.
-- **INTERVIEW_FLOW.md**: A structured narrative for the demo.
-- **INTERVIEW_BULLETS.md**: Quick talking points.
-- **ARCHITECTURE_DIAGRAM.md**: System visualizations.
-- **INTERVIEW_TIPS.md**: Technical deep-dive preparation.
