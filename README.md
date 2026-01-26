@@ -127,9 +127,9 @@ curl http://localhost:8000/agent/result/1
 minimeter2/
 ├── api/              # FastAPI application
 ├── worker/           # Pub/Sub consumer + LLM pipeline
-│   ├── connectors/   # Utility provider connectors
-│   ├── llm.py        # Gemini extraction
-│   └── main.py       # Worker entrypoint
-├── shared/           # Pydantic models
-└── docs/             # Architecture documentation
+├── shared/           # Pydantic models & DB schemas
+├── docs/             # General documentation
+│   └── interview_prep/ # SPECIFIC TRUEMETER INTERVIEW GUIDES
+├── test_pipeline.sh  # Local end-to-end test script
+└── test_cloud.sh    # Live Cloud Run test script
 ```
