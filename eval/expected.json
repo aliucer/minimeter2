@@ -1,0 +1,20 @@
+{
+    "bill_1.txt": {
+        "billing_period_start": "2025-12-01",
+        "billing_period_end": "2025-12-31",
+        "total_amount": 106.40,
+        "line_items_count": 4
+    },
+    "bill_2.txt": {
+        "billing_period_start": "2025-01-01",
+        "billing_period_end": "2025-01-31",
+        "total_amount": 101.59,
+        "line_items_count": 5
+    },
+    "bill_3.txt": {
+        "billing_period_start": "2025-02-01",
+        "billing_period_end": "2025-02-28",
+        "total_amount": 203.29,
+        "line_items_count": 8
+    }
+}

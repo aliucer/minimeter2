@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+sqlalchemy
+psycopg2-binary
+google-cloud-pubsub
+google-cloud-secret-manager
+python-dotenv==1.2.1
+google-cloud-aiplatform==1.134.0
+google-cloud-bigquery==3.40.0
+google-cloud-storage==3.8.0
