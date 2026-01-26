@@ -13,11 +13,15 @@ Mülakat anında ekrana bakıp hızlıca söyleyebileceğin anahtar noktalar:
 *   **Serverless:** Google Cloud Run üzerinde otomatik ölçeklenebilir (Scalable) bir yapı.
 *   **Data Warehouse:** Operasyonel veri için PostgreSQL, analitik için BigQuery.
 
-### ⚙️ İş Akışı (The Pipeline)
-*   **API:** İsteği alır, dosyayı GCS'e atar, Pub/Sub'a mesaj bırakır (Hızlı yanıt verir).
-*   **Worker:** Mesajı alır, LLM ile veriyi (tutar, tarih, kalemler) çıkartır.
-*   **Validation:** Pydantic ile veri doğruluğunu garanti ederim.
-*   **Persistence:** Veriyi hem DB'ye hem BQ'ya kaydederek süreci tamamlar.
+### ⚙️ İş Akışı (Detailed Pipeline)
+*   **Job Creation:** API isteği alır, DB'de `PENDING` job oluşturur, `job_id` döner (Non-blocking).
+*   **Pub/Sub:** Tüm metadata bir JSON mesajı olarak kuyruğa (Queue) push edilir.
+*   **Worker:** Mesajı alır, durumu `RUNNING` yapar.
+*   **Ingestion:** Connector ile faturayı çeker ve **GCS**'e (`raw/bills/`) yükler.
+*   **AI Processing:** GCS'den dosyayı okur, **Gemini (LLM)** ile veriyi çıkartır.
+*   **Validation:** LLM çıktısı **Pydantic** modelleri ile doğrulanır.
+*   **Persistence:** Veri hem **PostgreSQL**'e (Ops) hem **BigQuery**'ye (Analytics) yazılır.
+*   **Finalization:** Job durumu `SUCCEEDED` olarak güncellenir.
 
 ### 🛠️ Kritik Özellikler (Key Highlights)
 *   **Asenkron Mimari:** Yüksek yük altında sistemin tıkanmasını engeller (Decoupled system).

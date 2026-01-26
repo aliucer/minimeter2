@@ -34,20 +34,39 @@ Bu döküman, mülakatta projeyi anlatırken izlemen gereken **hikaye akışın�
 
 ---
 
-## 3. "Nasıl Çalışıyor?" (The "Deep Dive")
-*Süre: 3 dakika*
-*(Burada teknik derinliğini göstereceksin)*
+## 3. "Nasıl Çalışıyor?" (Detailed Technical Pipeline)
+*Süre: 4-5 dakika*
 
-**Sen:** "Sistemin en kritik noktası **Asenkron İşleme Hattı (Pipeline)**."
+**Sen:** "Sistemin en kritik noktası, asenkron olarak çalışan **End-to-End Processing Pipeline**'dır. İşte bir faturanın sistemdeki yolculuğu:"
 
-1.  **Ingestion (Veri Alımı):** Kullanıcı faturayı yükler. API bunu Cloud Storage'a (GCS) kaydeder ve Pub/Sub'a `INGEST_BILL` eventi atar.
-2.  **Processing (İşleme):** Worker, bu eventi yakalar. Dosyayı indirir ve **LLM (Large Language Model)** servisine gönderir.
-3.  **Normalization:** LLM'den dönen ham veri (JSON), Pydantic modelleri ile doğrulanır (Validation). Eksik alan varsa `fallback` mekanizmaları devreye girer.
-4.  **Storage:** Temiz veri hem PostgreSQL'e hem de BigQuery'ye yazılır.
+1.  **Job Creation (API):**
+    *   Kullanıcı `/agent/run` endpoint'ine bir request atar.
+    *   API, PostgreSQL üzerinde hemen bir `IngestionJob` kaydı oluşturur (Status: `PENDING`).
+    *   Bu aşamada kullanıcıya anında bir `job_id` dönülür (Non-blocking).
 
-**Neden böyle yaptım?**
-*   "API'yi bloklamamak (Non-blocking) için."
-*   "Yüksek trafik gelirse Queue (Kuyruk) mekanizması sayesinde sistem çökmez, yavaş yavaş işler (Backpressure)."
+2.  **Messaging (Pub/Sub):**
+    *   API, gerekli tüm metadata'yı (job_id, account_id, provider) içeren bir JSON mesajını **Google Cloud Pub/Sub**'a push eder.
+
+3.  **Worker Activation:**
+    *   Arka planda dinleyen **Worker** servisi mesajı alır.
+    *   İlk iş olarak DB'den işin durumunu kontrol eder (**Idempotency check**) ve durumu `RUNNING` olarak günceller.
+
+4.  **Ingestion & Storage (GCS):**
+    *   Worker, ilgili `Provider Connector`'ü (Mock veya Real) kullanarak faturayı çeker.
+    *   Ham faturayı **Google Cloud Storage (GCS)** üzerine bir `artifact` olarak kaydeder (`raw/bills/{job_id}.txt`).
+
+5.  **AI Extraction (LLM):**
+    *   Worker, GCS'den dosyayı okur ve içeriği **Gemini (LLM)** API'sine gönderir.
+    *   AI'dan dönen veriyi **Pydantic** modelleriyle doğrular (tutar formatı, tarih geçerliliği vb.).
+
+6.  **Persistence & Analytics (DB & BQ):**
+    *   **PostgreSQL:** Operasyonel takip için normalize edilmiş veri buraya yazılır.
+    *   **BigQuery:** Analiz ve raporlama için veri aynı anda BigQuery'ye stream edilir.
+    *   Son olarak Job status `SUCCEEDED` olarak güncellenir.
+
+**Neden bu kadar detaylı?**
+*   **Hata Yönetimi (Retry Logic):** "Eğer LLM veya DB o an erişilemezse, mesaj Pub/Sub'da kalır ve Worker otomatik olarak tekrar dener (Exponential Backoff)."
+*   **Ölçeklenebilirlik:** "Aynı anda binlerce fatura gelse bile sistem kilitlenmez, sadece kuyruk (queue) uzar."
 
 ---
 
