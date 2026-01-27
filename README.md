@@ -2,7 +2,7 @@
 
 A demonstration of an AI-powered energy bill processing pipeline built with Python, FastAPI, and Google Cloud.
 
-## 🚀 Live Demo
+## Live Demo
 
 **Production API:** [https://minimeter-api-787646377501.us-central1.run.app/docs](https://minimeter-api-787646377501.us-central1.run.app/docs)
 
@@ -42,7 +42,7 @@ cp .env.example .env
 # Edit .env with your GCP project details and database URL
 ```
 
-## ☁️ Cloud Demo (No Setup Required)
+## Cloud Demo (No Setup Required)
 
 You can interact with the live deployed API directly.
 
@@ -84,7 +84,7 @@ curl "https://minimeter-api-787646377501.us-central1.run.app/agent/result/123"
 
 ---
 
-## 💻 Local Demo (5 commands)
+## Local Demo (5 commands)
 
 ### 1. Start the services
 ```bash
