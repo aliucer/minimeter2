@@ -2,6 +2,12 @@
 
 A demonstration of an AI-powered energy bill processing pipeline built with Python, FastAPI, and Google Cloud.
 
+## 🚀 Live Demo
+
+**Production API:** [https://minimeter-api-787646377501.us-central1.run.app/docs](https://minimeter-api-787646377501.us-central1.run.app/docs)
+
+The application is deployed on Google Cloud Run with auto-scaling infrastructure. Visit the Swagger UI to explore the API endpoints interactively.
+
 ## Architecture
 
 ```
@@ -125,10 +131,26 @@ curl http://localhost:8000/agent/result/1
 
 ```
 minimeter2/
-├── api/              # FastAPI application
-├── worker/           # Pub/Sub consumer + LLM pipeline
-├── shared/           # Pydantic models & DB schemas
-├── docs/             # Documentation & Architecture
-├── test_pipeline.sh  # Local end-to-end test script
-└── test_cloud.sh    # Live Cloud Run test script
+├── api/              # API Service (FastAPI)
+├── worker/           # Processing Service (Asynchronous Worker)
+├── shared/           # Shared Schemas & Database Models
+├── docs/             # Technical Documentation
+├── eval/             # Evaluation & Testing Suite
+├── test_pipeline.sh  # Local E2E Pipeline Test
+└── test_cloud.sh    # Cloud Deployment Verification
 ```
+
+## Testing
+
+### Automated E2E Tests
+Run the full pipeline locally:
+```bash
+./test_pipeline.sh
+```
+
+Test against the live Cloud Run deployment:
+```bash
+./test_cloud.sh
+```
+
+Both scripts will create a customer, utility account, trigger the AI agent, and verify the extracted bill data.
