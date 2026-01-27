@@ -46,8 +46,23 @@ cp .env.example .env
 
 You can interact with the live deployed API directly.
 
-### 1. Create a Job
-Trigger the AI agent for an existing utility account (ID: 1):
+### 1. Setup Data
+First, create a customer and a utility account to process:
+
+```bash
+# Create Customer
+curl -X POST "https://minimeter-api-787646377501.us-central1.run.app/customers" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Interview Demo Corp"}'
+
+# Create Utility Account (Note the ID returned from above, usually increments. We'll use 1 for example)
+curl -X POST "https://minimeter-api-787646377501.us-central1.run.app/utility-accounts" \
+  -H "Content-Type: application/json" \
+  -d '{"customer_id": 1, "provider": "MOCK_A"}'
+```
+
+### 2. Create a Job
+Trigger the AI agent for the utility account (ID: 1):
 
 ```bash
 curl -X POST "https://minimeter-api-787646377501.us-central1.run.app/agent/run" \
@@ -60,7 +75,7 @@ curl -X POST "https://minimeter-api-787646377501.us-central1.run.app/agent/run" 
 {"job_id": 123, "message": "Agent job started..."}
 ```
 
-### 2. Check Results
+### 3. Check Results
 Replace `123` with your `job_id`:
 
 ```bash
