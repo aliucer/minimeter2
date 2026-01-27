@@ -42,7 +42,34 @@ cp .env.example .env
 # Edit .env with your GCP project details and database URL
 ```
 
-## Quick Demo (5 commands)
+## ☁️ Cloud Demo (No Setup Required)
+
+You can interact with the live deployed API directly.
+
+### 1. Create a Job
+Trigger the AI agent for an existing utility account (ID: 1):
+
+```bash
+curl -X POST "https://minimeter-api-787646377501.us-central1.run.app/agent/run" \
+  -H "Content-Type: application/json" \
+  -d '{"utility_account_id": 1}'
+```
+
+**Response:**
+```json
+{"job_id": 123, "message": "Agent job started..."}
+```
+
+### 2. Check Results
+Replace `123` with your `job_id`:
+
+```bash
+curl "https://minimeter-api-787646377501.us-central1.run.app/agent/result/123"
+```
+
+---
+
+## 💻 Local Demo (5 commands)
 
 ### 1. Start the services
 ```bash

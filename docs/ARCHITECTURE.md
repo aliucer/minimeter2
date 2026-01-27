@@ -3,7 +3,7 @@
 ## Project Summary
 AI-powered energy bill processing pipeline demonstrating LLM integration, async job processing, and multi-cloud service orchestration.
 
-**Total Codebase:** ~930 lines of Python
+**Total Codebase:** ~1,034 lines of Python
 
 ---
 
@@ -199,14 +199,25 @@ curl http://localhost:8000/agent/result/{job_id}
 python -m eval.run
 ```
 
+## Running on Cloud
+
+The system is deployed on Google Cloud Run.
+
+**Base URL:** `https://minimeter-api-787646377501.us-central1.run.app`
+
+```bash
+# Trigger Agent
+curl -X POST "https://minimeter-api-787646377501.us-central1.run.app/agent/run?utility_account_id=1"
+```
+
 ---
 
 ## File Line Counts
 
 | Module | Lines |
 |--------|-------|
-| api/ | 223 |
-| worker/ | 529 |
-| shared/ | 176 |
+| api/ | 184 |
+| worker/ | 538 |
+| shared/ | 234 |
 | eval/ | ~80 |
-| **Total** | **~930** |
+| **Total** | **~1,034** |
