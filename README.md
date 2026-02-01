@@ -10,17 +10,25 @@ The application is deployed on Google Cloud Run with auto-scaling infrastructure
 
 ## Architecture
 
-```
-┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│   Cloud Run     │────▶│    Cloud SQL     │◀────│     Worker      │
-│   (FastAPI)     │     │   (Postgres)     │     │   (Pub/Sub)     │
-└────────┬────────┘     └──────────────────┘     └────────┬────────┘
-         │                                                 │
-         ▼                                                 ▼
-    ┌─────────┐         ┌──────────────────┐     ┌─────────────────┐
-    │ Pub/Sub │────────▶│  Vertex AI LLM   │     │    BigQuery     │
-    └─────────┘         │    (Gemini)      │     │   (Analytics)   │
-                        └──────────────────┘     └─────────────────┘
+```mermaid
+graph LR
+    subgraph "Google Cloud Platform Infrastructure"
+        API[Cloud Run (FastAPI)] -->|Writes State| SQL[(Cloud SQL Postgres)]
+        API -->|Publishes Event| PS[Pub/Sub Topic]
+        
+        PS -->|Triggers| Worker[Async Worker]
+        
+        Worker -->|Updates State| SQL
+        Worker -->|Extracts Data| Vertex[Vertex AI Gemini]
+        Worker -->|Stores Analytics| BQ[(BigQuery)]
+    end
+
+    style API fill:#4285F4,stroke:#333,stroke-width:2px,color:white
+    style SQL fill:#4285F4,stroke:#333,stroke-width:2px,color:white
+    style PS fill:#EA4335,stroke:#333,stroke-width:2px,color:white
+    style Worker fill:#34A853,stroke:#333,stroke-width:2px,color:white
+    style Vertex fill:#FBBC04,stroke:#333,stroke-width:2px,color:white
+    style BQ fill:#4285F4,stroke:#333,stroke-width:2px,color:white
 ```
 
 ## Setup
