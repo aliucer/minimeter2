@@ -23,12 +23,12 @@ graph LR
         Worker -->|Stores Analytics| BQ[(BigQuery)]
     end
 
-    style API fill:#4285F4,stroke:#333,stroke-width:2px,color:white
-    style SQL fill:#4285F4,stroke:#333,stroke-width:2px,color:white
-    style PS fill:#EA4335,stroke:#333,stroke-width:2px,color:white
-    style Worker fill:#34A853,stroke:#333,stroke-width:2px,color:white
-    style Vertex fill:#FBBC04,stroke:#333,stroke-width:2px,color:white
-    style BQ fill:#4285F4,stroke:#333,stroke-width:2px,color:white
+    style API fill:#4285F4,stroke:#333,stroke-width:2px,color:#fff
+    style SQL fill:#4285F4,stroke:#333,stroke-width:2px,color:#fff
+    style PS fill:#EA4335,stroke:#333,stroke-width:2px,color:#fff
+    style Worker fill:#34A853,stroke:#333,stroke-width:2px,color:#fff
+    style Vertex fill:#FBBC04,stroke:#333,stroke-width:2px,color:#fff
+    style BQ fill:#4285F4,stroke:#333,stroke-width:2px,color:#fff
 ```
 
 ## Setup
