@@ -13,14 +13,14 @@ The application is deployed on Google Cloud Run with auto-scaling infrastructure
 ```mermaid
 graph LR
     subgraph "Google Cloud Platform Infrastructure"
-        API[Cloud Run (FastAPI)] -->|Writes State| SQL[(Cloud SQL Postgres)]
-        API -->|Publishes Event| PS[Pub/Sub Topic]
+        API["Cloud Run (FastAPI)"] -->|Writes State| SQL[("Cloud SQL Postgres")]
+        API -->|Publishes Event| PS["Pub/Sub Topic"]
         
-        PS -->|Triggers| Worker[Async Worker]
+        PS -->|Triggers| Worker["Async Worker"]
         
         Worker -->|Updates State| SQL
-        Worker -->|Extracts Data| Vertex[Vertex AI Gemini]
-        Worker -->|Stores Analytics| BQ[(BigQuery)]
+        Worker -->|Extracts Data| Vertex["Vertex AI Gemini"]
+        Worker -->|Stores Analytics| BQ[("BigQuery")]
     end
 
     style API fill:#4285F4,stroke:#333,stroke-width:2px,color:#fff
